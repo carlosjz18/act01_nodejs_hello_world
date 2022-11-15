@@ -1,0 +1,50 @@
+-- COMANDOS DOCKER --
+
+- Bajar imagenes desde un repositorio de imagenes
+> docker pull <image>
+
+- Ver imagenes bajadas de repositorio
+> docker images
+> docker images | grep ubuntu
+
+- Correr contenedor conectandose al shell bash
+> docker run -it ubuntu bash
+
+- Saber si la instancia de un contenedor esta corriendo (ver los procesos corriendo)
+> docker ps
+
+- Listar todos los contenedores prendidos y apagados
+> docker ps -a
+
+- Simplemente correr el contenedor
+> docker run ubuntu
+
+- Borrar images
+> docker rmi <id>
+
+- Construir image a partir de Dockerfile
+> docker build .
+
+- Construir image a partir de Dockerfile con nombre y etiqueta
+> docker build -t bedu/test1:1.0.0 .
+
+- Ejecutar container conectandose a shell bash
+> docker run -ti bedu/test1:1.0.0 bash
+
+
+----------------------------------------------------
+
+-- Commandos ejecutados dentro del container --
+
+apt update
+apt install nodejs
+apt search jdk
+apt install openjdk-8-jre-headless
+history | head -n20
+history > comandosEjecutados.txt
+
+----------------------------------------------------
+
+npm init
+zsh - tipo terminal
+https://github.com/jorgearma1982/lab-test-ci
