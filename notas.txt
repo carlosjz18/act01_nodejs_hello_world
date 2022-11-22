@@ -2,6 +2,35 @@
 
 - Bajar imagenes desde un repositorio de imagenes
 > docker pull <image>
+> docker pull ubuntu
+
+- Crear contenedor sin nombre asignado
+> docker create mongo
+> docker create <nombre_imagen_base_para_crear_contenedor>
+
+- Crear contenedor con nombre personalizado
+> docker create --name <nombre_contenedor_personalizado> <nombre_imagen_base_para_crear_contenedor>
+> docker create -p27017:27017 --name monguito mongo
+
+- Ejecutar contenedor
+> docker start <id_container o nombre_contenedor>
+
+- Detener contenedor
+> docker stop <id_container o nombre_contenedor>
+
+- Crear contenedores con run
+> docker run -d --name <nombre_contenedor_personalizado> -p80:80 <nombre_imagen_base_para_crear_contenedor>
+> docker run -d --name apache-server -p80:80 httpd
+> docker run ubuntu
+-----------------------------
+-d: destached, se ejecutara sin mostrar los logs en --follow y podremos ejecutar mas comandos.
+--name: nombre del contenedor creado.
+-p: published, comando para poder mapear los puertos del contenedor con nuestra máquina.
+-----------------------------
+run hace tres cosas (pull, create, start):
+1. Se encuentra la imagen?, si no la descarga.
+2. Crear un contenedor.
+3. Iniciar el contenedor
 
 - Ver imagenes bajadas de repositorio
 > docker images
@@ -16,11 +45,15 @@
 - Listar todos los contenedores prendidos y apagados
 > docker ps -a
 
-- Simplemente correr el contenedor
-> docker run ubuntu
+- Crear imagen Docker a partir de una Imagen Docker existente
+> docker commit <id_container> <nombre_imagen_docker>
+> docker commit dfd2cfa94c57 ubuntu-update
 
-- Borrar images
-> docker rmi <id>
+- Eliminar container
+> docker rm <id_container o nombre_contenedor>
+
+- Eliminar image
+> docker rmi <id_container o nombre_contenedor>
 
 - Construir image a partir de Dockerfile
 > docker build .
@@ -31,7 +64,19 @@
 - Ejecutar container conectandose a shell bash
 > docker run -ti bedu/test1:1.0.0 bash
 
+- Listar todas las redes que tiene configurado docker
+> docker network ls
 
+- Crear red docker
+> docker network create <nombre_red>
+> docker network create mired
+
+- Eliminar red docker
+> docker network rm <nombre_red>
+> docker network rm mired
+
+- Crear contenedor con una red asignada
+> docker create -p27017:27017 --name monguito --network mired -e MONGO_INITDB_ROOT_USERNAME=cj -e MONGO_INITDB_ROOT_PASSWORD=password mongo
 ----------------------------------------------------
 
 -- Commandos ejecutados dentro del container --
@@ -48,3 +93,49 @@ history > comandosEjecutados.txt
 npm init
 zsh - tipo terminal
 https://github.com/jorgearma1982/lab-test-ci
+
+----------------------------------------------------
+
+-- Postwork: Arrancar contenedor http con Página de BEDU --
+Sesion 04 : Fundamentos de DevSecOps
+
+1. Descargar la imagen al local
+> docker pull httpd
+
+2. Ver images
+> docker images
+
+3. Correr contenedor (servidor apache):
+> docker run -d --name apache-server -p80:80 httpd
+
+4. Ver contenedores corriendo
+> docker ps
+
+5. Ejecutar bash del container
+> docker exec -it 5ec19c1e3408 bash
+
+6. Actualizar paquetes
+> apt-get update & apt-get upgrade -y
+
+7. Instalar herramientas
+> apt install wget
+> apt install zip
+
+8. Ir al directorio
+> cd /usr/local/apache2/htdocs
+
+9. Descargar zip, con el site a desplegar
+> wget https://github.com/beduExpert/DevOps-Fundamentals-2021/raw/main/Sesion-01/coming-soon-evening-html.zip
+
+10. Descomprimir el zip
+> unzip coming-soon-evening-html.zip
+----------------------------------------------------
+
+Dudas para el experto:
+- Linea que separa a los images y los contenedores
+- Que significa -y del comando: apt-get update & apt-get upgrade -y
+
+-----------------------------------------------------
+
+
+----------------------------------------------------
