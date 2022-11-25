@@ -77,6 +77,31 @@ run hace tres cosas (pull, create, start):
 
 - Crear contenedor con una red asignada
 > docker create -p27017:27017 --name monguito --network mired -e MONGO_INITDB_ROOT_USERNAME=cj -e MONGO_INITDB_ROOT_PASSWORD=password mongo
+
+- Ejecutar comandos dentro del contenedor
+> docker exec <nombre-contenedor> <comando>
+> docker exec monguito cat /var/jenkins_home/secrets/initialAdminPassword
+
+- Listar volumes de docker
+> docker volume ls
+
+- Ver info de volume especifico
+> docker volume inspect <nombre_volume>
+> docker volume inspect jenkins_home
+
+> docker inspect jenkins_home
+
+- Volumes
+Tipos:
+    - Anónimo: solo indicas la ruta la cual se desea que sea montada, docker se encarga de guardarlo donde el decida,
+    este tipo no se puede referenciar para que lo utilice otro contenedor.
+    - De anfitrión o host: tu decides que carpeta montar y donde montarla.
+    - Nombrado: es como el tipo anónimo pero la principal diferencia que tiene es que después se puede referenciar este volumen
+    nombrado eventualmente cuando crees otro contenedor de esta manera se puede reutilizar con esa imagen u otras diferentes.
+
+- Ubicar volumes in Windows + WSL 2 (Ubuntu)
+    - C:\Users\carlos.jaimez\AppData\Local\Docker\wsl\data > ext4 (Archivo de imagen de disco duro)
+    - \\wsl$\docker-desktop-data\data\docker\volumes
 ----------------------------------------------------
 
 -- Commandos ejecutados dentro del container --
