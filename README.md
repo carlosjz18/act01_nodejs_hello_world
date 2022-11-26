@@ -7,6 +7,9 @@ BEDU: Developer Engineering
 * Modulo #1: Desarrollo de software ágil
 * Tema #4: Fundamentos de DevSecOps
 
+## Comandos Docker 💻
+
+Consultar el archivo `notas.txt` para ver la lista de comandos Docker.
 
 ## Construido con 🛠️
 
